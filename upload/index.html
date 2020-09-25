@@ -13,7 +13,7 @@
                     var form_data = new FormData();
                     form_data.append('file', file_data);
                     $.ajax({
-                        url: 'http://127.0.0.1:8000/upload', 
+                        url: '/upload', 
                         dataType: 'text',
                         cache: false,
                         contentType: false,
@@ -43,6 +43,7 @@
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </form><br/><br/>
+        
         <button type="button" class="btn btn-primary" id="upload">Upload</button><br/>
         {% if path is not None %}
             <p class="text-center">YELLOW - Mitosis</p>
