@@ -1,0 +1,42 @@
+<html>
+        <head>
+            <meta charset="UTF-8">
+            <title>AJAX image upload with, jQuery</title>
+            {% load static %}
+            <link rel="stylesheet" href="{% static 'style.css' %}">
+            <link href="https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap" rel="stylesheet">
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function (e) {
+                    $('#upload').on('click', function () {
+                        var file_data = $('#file').prop('files')[0];
+                        var form_data = new FormData();
+                        form_data.append('file', file_data);
+                        $.ajax({
+                            url: 'http://127.0.0.1:8000/upload', // point to server-side controller method
+                            dataType: 'text', // what to expect back from the server
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: form_data,
+                            type: 'post',
+                            success: function (response) {
+                                $('#msg').html(response); // display success response from the server
+                            },
+                            error: function (response) {
+                                $('#msg').html(response); // display error response from the server
+                            }
+                        });
+                    });
+                });
+            </script>
+        </head>
+        <body>
+            <p id="msg">{{ data.image_name }}</p>
+            <div class"container">
+                <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label">Enter</label>
+                <input type="file" id="file" name="file" multiple />
+                <button id="upload">Upload</button>
+            </div>
+        </body>
+    </html>

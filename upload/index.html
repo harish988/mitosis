@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <title>Upload Image</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function (e) {
+                $('#upload').on('click', function () {
+                    var file_data = $('#file').prop('files')[0];
+                    var form_data = new FormData();
+                    form_data.append('file', file_data);
+                    $.ajax({
+                        url: 'http://127.0.0.1:8000/upload', 
+                        dataType: 'text',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: form_data,
+                        type: 'post',
+                        success: function (response) {
+                            response = JSON.parse(response)
+                            var loc = response.file;
+                            var arr = loc.split("/");
+                            var name = arr[arr.length - 1].slice(0, -5)
+                            window.location = "http://127.0.0.1:8000/result/"+name;
+                        },
+                        error: function (response) {
+                           console.log(response);
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <br/><br/><br/>
+        <form>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input file" id="file" multiple>
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </form><br/><br/>
+        <button type="button" class="btn btn-primary" id="upload">Upload</button><br/>
+        {% if path is not None %}
+            <p class="text-center">YELLOW - Mitosis</p>
+            <p class="text-center">BLUE - Non-Mitosis</p>
+            <p class="text-left">Predicted Image</p>
+            <img src="{% static path %}" class="rounded" alt="Predicted Image" id="prediction">
+        {% endif %}
+    </body>
+    <script>
+            $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+    </script>
+</html>
