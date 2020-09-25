@@ -138,3 +138,11 @@ STATIC_ROOT=os.path.join(BASE_DIR, "allstaticfiles")
 
 MEDIA_URL =  '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "images")
+
+##### Model Values #####
+models = {
+    "InceptionV3": ["4096"],
+    "Restnet50": ["2048"],
+    "FRCNN": ["4096"],
+    "CNN": ["1000"]
+}

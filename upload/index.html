@@ -12,6 +12,7 @@
                     var file_data = $('#file').prop('files')[0];
                     var form_data = new FormData();
                     form_data.append('file', file_data);
+                    form_data.append('model', "inceptionv3");
                     $.ajax({
                         url: '/upload', 
                         dataType: 'text',
