@@ -14,7 +14,7 @@
                     form_data.append('file', file_data);
                     form_data.append('model', "inceptionv3");
                     $.ajax({
-                        url: '/upload', 
+                        url: 'http://127.0.0.1:8000/upload', 
                         dataType: 'text',
                         cache: false,
                         contentType: false,
@@ -39,12 +39,36 @@
     <body>
         <br/><br/><br/>
         <form>
+            <div class="form-check-inline">
+                Choose Scanner: 
+                <label class="form-check-label"> 
+                  <input type="radio" class="form-check-input" name="optradio"> Aperio
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label">
+                  <input type="radio" class="form-check-input" name="optradio">Hamamatsu
+                </label>
+              </div>
+              
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Choose Model
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#">Resnet50</a>
+                  <a class="dropdown-item" href="#">InceptionV3</a>
+                  <a class="dropdown-item" href="#">Faster R-CNN</a>
+                  <a class="dropdown-item" href="#">CNN</a>
+                </div>
+              </div>
+        </form>
+        <form>
             <div class="custom-file">
                 <input type="file" class="custom-file-input file" id="file" multiple>
                 <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
         </form><br/><br/>
-        
         <button type="button" class="btn btn-primary" id="upload">Upload</button><br/>
         {% if path is not None %}
             <p class="text-center">YELLOW - Mitosis</p>
