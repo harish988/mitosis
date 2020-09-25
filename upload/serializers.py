@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import Model
+from .models import Model, Upload
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Model
+        model = Upload
         fields = "__all__"

@@ -12,7 +12,9 @@
                     var file_data = $('#file').prop('files')[0];
                     var form_data = new FormData();
                     form_data.append('file', file_data);
-                    form_data.append('model', "inceptionv3");
+                    var model_data = $('#modelSelect').value;
+                    console.log(model_data)
+                    form_data.append('model', model_data);
                     $.ajax({
                         url: 'http://127.0.0.1:8000/upload', 
                         dataType: 'text',
@@ -54,11 +56,11 @@
              <br/>
               <div class="form-group">
                 <label for="sel1">Select Model</label>
-                <select class="form-control" id="sel1">
-                  <option>Resnet50</option>
-                  <option>InceptionV3</option>
-                  <option>FasterRCNN</option>
-                  <option>CNN</option>
+                <select class="form-control" id="modelSelect">
+                  <option value="Restnet50">Resnet50</option>
+                  <option value="InceptionV3">InceptionV3</option>
+                  <option value="FasterRCNN">FasterRCNN</option>
+                  <option value="CNN">CNN</option>
                 </select>
               </div>
         </form>

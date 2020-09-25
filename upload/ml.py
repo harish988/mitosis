@@ -31,7 +31,6 @@ def annotate(image):
         y.append(df_mitosis.iloc[i,1])
         c.append('yellow')
     
-
     for j in range(len(df_not_mitosis)):
         x.append(df_not_mitosis.iloc[j,0])
         y.append(df_not_mitosis.iloc[j,1])
@@ -39,8 +38,7 @@ def annotate(image):
             c.append('green')
         else:
             c.append("blue")
-        
-        
+             
     time.sleep(2)
     #ANNOTATION
     #Mitosis -  Yellow

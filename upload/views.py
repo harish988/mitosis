@@ -24,8 +24,9 @@ def home(request):
 @csrf_exempt
 def result(request, image_id):
     path = "/predictions/"+image_id+".jpg"
+    print(Model.objects.get(id=1))
     model = Model.objects.get(id=1).model
-    start_features = settings.models[model]
+    start_features = settings.MODELS[model]
     return render(request, 'upload/index.html', {'path':path, 'start_feature': start_features})
 
 class FileUploadView(CsrfExemptSessionAuthentication, APIView):
@@ -37,7 +38,7 @@ class FileUploadView(CsrfExemptSessionAuthentication, APIView):
         file_serializer = FileSerializer(data=request.data)
         model = request.data["model"]
         if(Model.objects.all().count() > 0):
-            Model.objects.all().delete()
+            Model.objects.get(id=1).delete()
         row = Model(id=1, model=model)
         row.save()
         if file_serializer.is_valid():

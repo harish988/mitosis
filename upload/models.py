@@ -6,3 +6,10 @@ class Model(models.Model):
 
     def __str__(self):
         return self.model
+
+
+class Upload(models.Model):
+    file = models.FileField(blank=False, null=False)
+
+    def __str__(self):
+        return self.file.name
